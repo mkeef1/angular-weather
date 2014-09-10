@@ -4,14 +4,12 @@
   'use strict';
 
   angular.module('weather')
-  .controller('WebcamsController', ['$scope', '$http', function($scope, $http){
+  .controller('WebcamsController', ['$scope', 'wu', function($scope, wu){
     $scope.title = 'Webcam shots';
 
 
     $scope.getWebcams = function(){
-      var url = 'http://api.wunderground.com/api/d400acb7c08a6ba9/webcams/q/' + $scope.zip + '.json?callback=JSON_CALLBACK';
-      $http.jsonp(url).then(function(response){
-        debugger;
+      wu.getWebcams($scope.zip).then(function(response){
         $scope.webcams = response.data.webcams;
       });
     };
